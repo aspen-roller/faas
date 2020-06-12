@@ -1,0 +1,23 @@
+{
+  "name": "faas",
+  "version": "1.0.0",
+  "description": "openfaas server",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "docker -c swarm1 stack deploy -c docker-compose.yml func",
+    "log": "docker -c swarm1 service logs func_faas-swarm -f --tail 100",
+    "ps": "watch docker -c swarm1 service ps func_faas-swarm --no-trunc",
+    "rm": "docker -c swarm1 stack rm func"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openfaas/faas.git"
+  },
+  "keywords": [],
+  "author": "James Roller, Jr. <james.roller@aspencapital.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/openfaas/faas/issues"
+  },
+  "homepage": "https://github.com/openfaas/faas#readme"
+}
