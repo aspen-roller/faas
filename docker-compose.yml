@@ -4,7 +4,7 @@ services:
   gateway:
     # ports:
     #   - 8080:8080
-    image: openfaas/gateway:0.18.13
+    image: openfaas/gateway:0.18.17
     networks:
       - functions
       - proxy
@@ -51,7 +51,7 @@ services:
 
   # auth service provide basic-auth plugin for system APIs
   basic-auth-plugin:
-    image: openfaas/basic-auth-plugin:0.18.13
+    image: openfaas/basic-auth-plugin:0.18.17
     networks:
       - functions
     environment:
@@ -110,7 +110,7 @@ services:
       - basic-auth-password
 
   nats:
-    image: nats-streaming:0.11.2
+    image: nats-streaming:0.17.0
     # Uncomment the following port mappings if you wish to expose the
     # NATS client and/or management ports you must also add `-m 8222` to the command
     # ports:
@@ -130,7 +130,7 @@ services:
           - node.platform.os == linux
 
   queue-worker:
-    image: openfaas/queue-worker:0.10.0
+    image: openfaas/queue-worker:0.11.2
     networks:
       - functions
     environment:
