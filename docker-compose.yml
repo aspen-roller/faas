@@ -224,6 +224,29 @@ services:
     secrets:
       - basic-auth-password
 
+# import dashboard 3434 for additional information in grafana
+  grafana:
+    image: stefanprodan/faas-grafana:4.6.3
+    networks:
+      - functions
+      - proxy
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+          - node.platform.os == linux
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+      labels:
+        traefik.enable: 'true'
+        traefik.http.routers.func-grafana.rule: Host(`func-grafana.swarm-np.gregoryfunding.com`)
+        traefik.http.routers.func-grafana.entrypoints: web
+        traefik.http.routers.func-grafana.service: func-grafana
+        traefik.http.services.func-grafana.loadbalancer.server.port: 3000
+
 configs:
   prometheus_config:
     file: ./prometheus/prometheus.yml
