@@ -37,7 +37,7 @@ services:
         window: 380s
       placement:
         constraints:
-          - "node.platform.os == linux"
+          - node.platform.os == linux
       labels:
         traefik.enable: 'true'
         traefik.http.routers.faas.rule: Host(`faas.swarm-np.gregoryfunding.com`)
@@ -60,8 +60,8 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.role == manager"
-          - "node.platform.os == linux"
+          - node.role == manager
+          - node.platform.os == linux
       resources:
         # limits:   # Enable if you want to limit memory usage
         #     memory: 100M
@@ -92,8 +92,8 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.role == manager"
-          - "node.platform.os == linux"
+          - node.role == manager
+          - node.platform.os == linux
       resources:
         # limits:   # Enable if you want to limit memory usage
         #     memory: 100M
@@ -126,7 +126,7 @@ services:
           memory: 50M
       placement:
         constraints:
-          - "node.platform.os == linux"
+          - node.platform.os == linux
 
   queue-worker:
     image: openfaas/queue-worker:0.10.0
@@ -152,7 +152,7 @@ services:
         window: 380s
       placement:
         constraints:
-          - "node.platform.os == linux"
+          - node.platform.os == linux
     secrets:
       - basic-auth-user
       - basic-auth-password
@@ -181,8 +181,8 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.role == manager"
-          - "node.platform.os == linux"
+          - node.role == manager
+          - node.platform.os == linux
       resources:
         limits:
           memory: 500M
@@ -216,8 +216,8 @@ services:
           memory: 20M
       placement:
         constraints:
-          - "node.role == manager"
-          - "node.platform.os == linux"
+          - node.role == manager
+          - node.platform.os == linux
     configs:
       - source: alertmanager_config
         target: /alertmanager.yml
