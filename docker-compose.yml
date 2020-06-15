@@ -1,4 +1,5 @@
 version: "3.3"
+
 services:
   gateway:
     # ports:
@@ -204,6 +205,7 @@ services:
       - "--storage.path=/alertmanager"
     networks:
       - functions
+      - proxy
     # Uncomment the following port mapping if you wish to expose the Prometheus
     # Alertmanager UI.
     # ports:
@@ -218,6 +220,12 @@ services:
         constraints:
           - node.role == manager
           - node.platform.os == linux
+      labels:
+        traefik.enable: 'true'
+        traefik.http.routers.func-alert.rule: Host(`func-alert.swarm-np.gregoryfunding.com`)
+        traefik.http.routers.func-alert.entrypoints: web
+        traefik.http.routers.func-alert.service: func-alert
+        traefik.http.services.func-alert.loadbalancer.server.port: 9093
     configs:
       - source: alertmanager_config
         target: /alertmanager.yml
